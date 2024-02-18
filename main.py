@@ -52,9 +52,9 @@ class Notes:
         with st.sidebar:
             option = option_menu(
                 menu_title=None,
-                options=["Home", "AI", "CNS", "DAA", "DBMS", "PQT", "CCTS", "UHV"],
+                options=["Home", "AI", "CNS", "DAA", "DBMS", "PQT", "CCTS", "UHV", "SE"],
                 orientation="vertical",
-                icons=["house-door", "robot", "key", "code-slash", "database", "percent", "lightbulb", "person-fill"],
+                icons=["house-door", "robot", "key", "code-slash", "database", "percent", "lightbulb", "person-fill", "person"],
                 default_index=0,
             )
 
@@ -116,6 +116,11 @@ class Notes:
             if option == "UHV":
                 uhv = Subject("21LEM202T<br>Universal Human Values", option)
                 uhv.app()
+
+            if option == "SE":
+                se = Subject("21PDM201T<br>Social Engineering", option)
+                se.app()
+
         except TypeError:
             center_title(50, "red", "We are experiencing technical difficulties, should be back up again soon")
     run()

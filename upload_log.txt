@@ -26,3 +26,4 @@ CNS - CNS Unit 1 .pdf
 CNS - Euclidean extended Euclidean cnt.pdf
 DAA - unit 1 - DAA.pptx
 DAA - unit_1_recurrence.pdf
+SE - Social Engg- Unit 1 notes.docx
