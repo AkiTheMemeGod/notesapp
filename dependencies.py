@@ -54,7 +54,7 @@ class Database:
             return doc_list
         except Exception:
             pass
-
+# checking GitHub
     def ass_list(self, subject):
         try:
             cursor = self.connection.cursor()
@@ -62,6 +62,18 @@ class Database:
             raw_list = cursor.fetchall()
             ass_list = [item[0] for item in raw_list if item[0] is not None]
             return ass_list
+        except Exception:
+            pass
+
+    def syllabus(self, subject):
+        try:
+            syll = subject.upper() + ' Syllabus.pdf'
+            cursor = self.connection.cursor()
+            cursor.execute(f"SELECT * FROM syllabus")
+            raw_list = cursor.fetchall()
+            syll_list = [item[1] for item in raw_list if syll in item]
+            # print(syll_list)
+            return str(syll), syll_list[0]
         except Exception:
             pass
 
@@ -118,22 +130,30 @@ class Subject(Database):
         center_title(60, "#0C2637", self.title)
 
         r = st.radio(label="Choose",
-                     options=["Notes", "Assignments"],
+                     options=["Notes", "Assignments", "Syllabus"],
                      label_visibility="hidden",
                      horizontal=True,
                      index=0)
 
         if r == "Notes":
             opts = self.notes_list(self.sub)
-        else:
+        if r == "Assignments":
             opts = self.ass_list(self.sub)
+        if r == "Syllabus":
+            opts, bin_data = self.syllabus(self.sub)
+            opts = [opts, ]
+            print(opts)
+
         center_title(50, "black", f"<br>📚 {r}")
         option = st.selectbox("Select the Document : ",
                               options=opts,
                               placeholder="Choose the document from here",
                               index=0)
         try:
-            name, bin_data, ass_name, assignment = self.get_data(self.sub, option, r)
+            if r == "Syllabus":
+                name, bin_data = self.syllabus(self.sub)
+            else:
+                name, bin_data, ass_name, assignment = self.get_data(self.sub, option, r)
             if r == "Assignments":
                 name = ass_name
                 bin_data = assignment
@@ -149,4 +169,5 @@ class Subject(Database):
                                use_container_width=True)
         except Exception as e:
             st.error(f"{r} are currently unavailable")
+            # st.write(e)
             # st.write(e)

@@ -18,6 +18,16 @@ class Upload:
             os.remove(f"upload/{i}")
         self.connection.commit()
 
+    def upload_syllabus(self, table):
+        cursor = self.connection.cursor()
+        for i in os.listdir("upload"):
+            byt = open(f"upload/{i}", "rb").read()
+            data = (i, byt)
+            cursor.execute(f"INSERT INTO syllabus (name, img) VALUES (?,?)", data)
+            update_log(f"{table.upper()} - {i}")
+            os.remove(f"upload/{i}")
+        self.connection.commit()
+
     def upload_assignments(self, table):
         cursor = self.connection.cursor()
         for i in os.listdir("upload"):
@@ -29,8 +39,8 @@ class Upload:
         self.connection.commit()
 
 
-option = input("Notes or Assignment?\n1 - For Notes.\n2 - For Assignments.\nEnter the option : ")
-subject = input("Enter the subject name (dbms/daa/cns/pqt/ai/ccts) : ")
+option = input("Notes or Assignment?\n1 - For Notes.\n2 - For Assignments.\n3 - For Syllabus.\nEnter the option : ")
+subject = input("Enter the subject name (dbms/daa/cns/pqt/ai/ccts/se/uhv) : ")
 subject = subject.lower()
 u = Upload()
 try:
@@ -38,6 +48,8 @@ try:
         u.upload_notes(subject)
     if option == "2":
         u.upload_assignments(subject)
+    if option == "3":
+        u.upload_syllabus(subject)
     else:
         exit("WRONG INPUT")
 

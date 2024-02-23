@@ -122,7 +122,7 @@ class Notes:
                 se.app()
 
         except TypeError:
-            center_title(50, "red", "We are experiencing technical difficulties, should be back up again soon")
+            center_title(50, "red", "Currently Unavailable")
     run()
 # joy
 

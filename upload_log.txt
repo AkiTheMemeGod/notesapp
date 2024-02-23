@@ -27,3 +27,11 @@ CNS - Euclidean extended Euclidean cnt.pdf
 DAA - unit 1 - DAA.pptx
 DAA - unit_1_recurrence.pdf
 SE - Social Engg- Unit 1 notes.docx
+DAA - DAA Syllabus.pdf
+DBMS - DBMS Syllabus.pdf
+PQT - PQT Syllabus.pdf
+AI - GENERATE_AND_TEST.docx
+DBMS - DBMS UNIT I.pptx
+DBMS - DBMS UNIT II.pptx
+CNS - CNS unit 1 Question Bank.pdf
+AI - AI SYLLABUS.pdf
