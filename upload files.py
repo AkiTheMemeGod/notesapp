@@ -7,6 +7,7 @@ from dependencies import update_log
 class Upload:
     def __init__(self):
         self.connection = sq.connect("sem4.db")
+        self.connection1 = sq.connect("2_sem4.db")
 
     def upload_notes(self, table):
         cursor = self.connection.cursor()
@@ -19,14 +20,14 @@ class Upload:
         self.connection.commit()
 
     def upload_syllabus(self, table):
-        cursor = self.connection.cursor()
+        cursor = self.connection1.cursor()
         for i in os.listdir("upload"):
             byt = open(f"upload/{i}", "rb").read()
             data = (i, byt)
             cursor.execute(f"INSERT INTO syllabus (name, img) VALUES (?,?)", data)
             update_log(f"{table.upper()} - {i}")
             os.remove(f"upload/{i}")
-        self.connection.commit()
+        self.connection1.commit()
 
     def upload_assignments(self, table):
         cursor = self.connection.cursor()

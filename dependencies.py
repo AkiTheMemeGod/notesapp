@@ -31,6 +31,7 @@ def update_log(update, filepath="upload_log.txt"):
 class Database:
     def __init__(self):
         self.connection = sq.connect("sem4.db")
+        self.connection1 = sq.connect("2_sem4.db")
 
     def get_data(self, subject, fetch, ass):
         what = (fetch, )
@@ -68,7 +69,7 @@ class Database:
     def syllabus(self, subject):
         try:
             syll = subject.upper() + ' Syllabus.pdf'
-            cursor = self.connection.cursor()
+            cursor = self.connection1.cursor()
             cursor.execute(f"SELECT * FROM syllabus")
             raw_list = cursor.fetchall()
             syll_list = [item[1] for item in raw_list if syll in item]
